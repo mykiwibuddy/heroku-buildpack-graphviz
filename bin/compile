@@ -9,12 +9,20 @@ echo "-----> Installing Graphviz"
 # Pick a version
 # https://archive.ubuntu.com/ubuntu/pool/universe/g/graphviz/graphviz_2.42.4-3build2_amd64.deb
 GRAPHVIZ_VERSION=2.42.4-3build2
-DEB_FILE=graphviz_${GRAPHVIZ_VERSION}_amd64.deb
-DEB_URL=http://archive.ubuntu.com/ubuntu/pool/universe/g/graphviz/$DEB_FILE
 
-curl -L -o /tmp/$DEB_FILE $DEB_URL
+# Packages we need
+BIN_PKG=graphviz_${GRAPHVIZ_VERSION}_amd64.deb
+DEV_PKG=libgraphviz-dev_${GRAPHVIZ_VERSION}_amd64.deb
 
+BIN_URL=http://archive.ubuntu.com/ubuntu/pool/universe/g/graphviz/$BIN_PKG
+DEV_URL=http://archive.ubuntu.com/ubuntu/pool/universe/g/graphviz/$DEV_PKG
+
+# Download
+curl -fsSL -o /tmp/$BIN_PKG $BIN_URL
+curl -fsSL -o /tmp/$DEV_PKG $DEV_URL
+
+# Extract into /vendor
 mkdir -p $BUILD_DIR/vendor/graphviz
-dpkg -x /tmp/$DEB_FILE $BUILD_DIR/vendor/graphviz
-
+dpkg -x /tmp/$BIN_PKG $BUILD_DIR/vendor/graphviz
+dpkg -x /tmp/$DEV_PKG $BUILD_DIR/vendor/graphviz
 echo "-----> Graphviz installed"
