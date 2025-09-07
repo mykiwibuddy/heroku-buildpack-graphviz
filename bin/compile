@@ -8,15 +8,12 @@ echo "-----> Installing Graphviz"
 
 # Pick a version
 GRAPHVIZ_VERSION=2.50.0
+DEB_FILE=graphviz_${GRAPHVIZ_VERSION}-1_amd64.deb
+DEB_URL=http://archive.ubuntu.com/ubuntu/pool/universe/g/graphviz/$DEB_FILE
 
-# Download and extract
-curl -L "https://gitlab.com/graphviz/graphviz/-/archive/${GRAPHVIZ_VERSION}/graphviz-${GRAPHVIZ_VERSION}.tar.gz" | tar xz
+curl -L -o /tmp/$DEB_FILE $DEB_URL
 
-cd graphviz-${GRAPHVIZ_VERSION}
-
-# Install into $BUILD_DIR/vendor
-./configure --prefix=$BUILD_DIR/vendor/graphviz
-make
-make install
+mkdir -p $BUILD_DIR/vendor/graphviz
+dpkg -x /tmp/$DEB_FILE $BUILD_DIR/vendor/graphviz
 
 echo "-----> Graphviz installed"
