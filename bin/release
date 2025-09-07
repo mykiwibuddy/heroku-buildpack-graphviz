@@ -2,5 +2,6 @@
 cat <<EOF
 ---
 config:
-  PATH: $PATH:/app/vendor/graphviz/usr/bin
+  PATH: /app/vendor/graphviz/usr/bin:\$PATH
+  LD_LIBRARY_PATH: /app/vendor/graphviz/usr/lib/x86_64-linux-gnu
 EOF
