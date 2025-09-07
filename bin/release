@@ -2,5 +2,5 @@
 cat <<EOF
 ---
 config:
-  PATH: $PATH:/app/vendor/graphviz/bin
+  PATH: $PATH:/app/vendor/graphviz/usr/bin
 EOF
